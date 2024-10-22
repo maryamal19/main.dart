@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         title: 'Namer App', //diberi judul Namer App
         theme: ThemeData( //data tema aplikasi, diberi nama deepOrange
           useMaterial3: true, //versi MaterialUI yg dipakai versi 3
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         ),
         home: MyHomePage(), //nama halaman "MyHomePage" yg menggunakan state "MyAppState"
       ),
@@ -41,12 +41,13 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>(); //widget menggunakan state MyAppState
+    var pair = appState.current; 
 
     return Scaffold( //base (canvas) dari layout
       body: Column( //diatas scaffold, ada body. body-nya, diberi kolom 
         children: [ //didalam kolom diberi teks 
-          Text('A random idea:'),
-          Text(appState.current.asLowerCase), //mengambil random  teks dari AppState pada variable WordPair current, lalu diubah menjadi huruf kecil semua, dan ditampilkan sebagai teks
+          Text('A random AWESOME idea:'),
+          BigCard(pair: pair),  //mengambil random  teks dari AppState pada variable WordPair current, lalu diubah menjadi huruf kecil semua, dan ditampilkan sebagai teks
           ElevatedButton( //membuat button timbul didalam body
             onPressed: () { //fungsi yg dieksekusi ketikan button ditekan
               print('button pressed!'); //tampilkan teks 'button pressed' diterminal saat button di tekan
@@ -56,6 +57,31 @@ class MyHomePage extends StatelessWidget {
           ),
 
         ],
+      ),
+    );
+  }
+}
+
+class BigCard extends StatelessWidget {
+  const BigCard({
+    super.key,
+    required this.pair,
+  });
+
+  final WordPair pair;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+     final style = theme.textTheme.displayMedium!.copyWith(
+      color: theme.colorScheme.onPrimary,
+    );
+    
+    return Card(
+      color: theme.colorScheme.primary,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Text(pair.asLowerCase),
       ),
     );
   }
