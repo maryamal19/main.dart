@@ -72,17 +72,19 @@ class BigCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final theme = Theme.of(context);//menambahkan tema pada card 
+    //membuat styel untuk text, diberi nama styel. styel warna mengikuti parrent
      final style = theme.textTheme.displayMedium!.copyWith(
       color: theme.colorScheme.onPrimary,
     );
     
-    return Card(
+    return Card(//membungkus padding didalam widget card
       color: theme.colorScheme.primary,
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Text(pair.asLowerCase),
-      ),
-    );
+        //mengubah kata dalam pair menjadi huruf kecil
+      ), //padding
+    ); //card
   }
 }
